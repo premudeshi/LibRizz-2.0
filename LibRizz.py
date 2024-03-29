@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 import datetime as dt
 import calendar
 import time
@@ -13,8 +14,7 @@ import pytz
 
 reservation_date = dt.datetime.now()+timedelta(days=7)
 
-reservation_rooms = ["370B", "370A", "381", "386", "176", "172",
-                     "377", "378", "379", "387", "388", "389", "371", "372", "373"]
+reservation_rooms = ["370B", "370A", "381", "386", "176", "172","377", "378", "379", "387", "388", "389", "371", "372", "373"]
 
 url = "https://ucf.libcal.com/spaces?lid=2824&gid=4780&c=0"
 
@@ -25,14 +25,12 @@ def main():
 
     chrome_options = webdriver.ChromeOptions()
     # chrome_options.add_argument("--headless")
-    driver1 = webdriver.Remote(
-        "http://172.17.0.2:4444", options=webdriver.ChromeOptions())
+    driver1 = webdriver.Remote("http://172.17.0.2:4444", options=webdriver.ChromeOptions())
+    #driver1 = webdriver.Chrome('./chromedriver')   #for debugging
     driver1.get(url)
     gotoday(driver1)
-    ReserveEngine(driver1, datetime.strptime("10:00am", "%I:%M%p"), datetime.strptime(
-        "2:00pm", "%I:%M%p"), NID1, Password1, SID1, Name1)
-    ReserveEngine(driver1, datetime.strptime("2:00pm", "%I:%M%p"), datetime.strptime(
-        "6:00pm", "%I:%M%p"), NID2, Password2, SID2, Name2)
+    ReserveEngine(driver1, datetime.strptime("10:00am", "%I:%M%p"), datetime.strptime("2:00pm", "%I:%M%p"), NID1, Password1, SID1, gname, lname1)
+    ReserveEngine(driver1, datetime.strptime("2:00pm", "%I:%M%p"), datetime.strptime("6:00pm", "%I:%M%p"), NID2, Password2, SID2, gname, lname2)
     Exit(driver1)
     # driver3 = webdriver.Chrome()
     # driver3.get(url)
@@ -42,12 +40,12 @@ def main():
 # confirms availability and calls reserve fuction to reserve it.
 
 
-def ReserveEngine(driver, start, finish, nid, passwrd, pid, name):
+def ReserveEngine(driver, start, finish, nid, passwrd, pid, gname,lname):
     i = 0
     while True:
         if checkavailable(driver, i, start, finish):
             print("Reserving Room: " + reservation_rooms[i], flush=True)
-            reserve(driver, i, start, finish, nid, passwrd, pid, name)
+            reserve(driver, i, start, finish, nid, passwrd, pid, gname,lname)
             break
         else:
             print("Could not reserve: " + reservation_rooms[i], flush=True)
@@ -56,83 +54,76 @@ def ReserveEngine(driver, start, finish, nid, passwrd, pid, name):
 # Log In function
 
 
-def login(driver, username, password, name):
-    print("Logging In As "+name, flush=True)
-    username_field = driver.find_element(
-        "xpath", "//input[@id='userNameInput']")
+def login(driver, username, password, nid):
+    print("Logging In As "+nid, flush=True)
+    time.sleep(10)
+    username_field = driver.find_element("xpath", "//input[@id='userNameInput']")
     username_field.send_keys(username)
-    password_field = driver.find_element(
-        "xpath", "//input[@id='passwordInput']")
+    username_field.send_keys(Keys.RETURN) 
+    time.sleep(3)
+    password_field = driver.find_element("xpath", "//input[@id='passwordInput']")
     password_field.send_keys(password)
     sign_on_button = driver.find_element("xpath", "//span[@id='submitButton']")
     sign_on_button.click()
     time.sleep(5)
-    print("Logged In Sucessfully As "+name, flush=True)
+    print("Logged In Sucessfully As "+nid, flush=True)
 
 # Log out function
 
 
-def logout(driver, name):
-    print("Logging out As "+name, flush=True)
+def logout(driver, nid):
+    print("Logging out As "+nid, flush=True)
     driver.find_element(By.LINK_TEXT, "Logout").click()
-    print("Logged out Sucessfully As "+name, flush=True)
+    print("Logged out Sucessfully As "+nid, flush=True)
     driver.get(url)
     gotoday(driver)
 
 
 # Room reservation function
 
-def reserve(driver, roomInt, start, finish, nid, passwrd, pid, name):
+def reserve(driver, roomInt, start, finish, nid, passwrd, pid, gname,lname):
     times = getTimesInList(start, finish)
-    print(times[0]+" to "+times[len(times)-1]+" on " +
-          reservation_date.strftime("%A, %B %d, %Y").replace(' 0', ' '), flush=True)
+    print(times[0]+" to "+times[len(times)-1]+" on " +reservation_date.strftime("%A, %B %d, %Y").replace(' 0', ' '), flush=True)
     myTimes = ListAvailablesStrings(start, finish, reservation_rooms[roomInt])
-    temp = driver.find_element(
-        "xpath", "//a[@class='fc-timeline-event fc-h-event fc-event fc-event-start fc-event-end fc-event-future s-lc-eq-avail' and @aria-label='"+myTimes[0]+"']")
+    temp = driver.find_element("xpath", "//a[@class='fc-timeline-event fc-h-event fc-event fc-event-start fc-event-end fc-event-future s-lc-eq-avail' and @aria-label='"+myTimes[0]+"']")
     driver.execute_script("arguments[0].click();", temp)
     time.sleep(4)
-    dropdown = driver.find_element(
-        "xpath", "//select[@class='form-control input-sm b-end-date']")
+    dropdown = driver.find_element("xpath", "//select[@class='form-control input-sm b-end-date']")
     dropselect = Select(dropdown)
-    dropselect.select_by_visible_text(times[len(
-        times)-1]+" "+reservation_date.strftime("%A, %B %d, %Y").replace(' 0', ' '))
+    dropselect.select_by_visible_text(times[len(times)-1]+" "+reservation_date.strftime("%A, %B %d, %Y").replace(' 0', ' '))
     time.sleep(3)
     driver.find_element("xpath", "//button[@id='submit_times']").click()
     time.sleep(2)
-    login(driver, nid, passwrd, name)
+    login(driver, nid, passwrd, nid)
     time.sleep(2)
-    driver.find_element(
-        "xpath", "//button[@class='btn btn-primary' and @name='continue']").click()
-    driver.find_element("xpath", "//input[@name='nick']").send_keys(name)
+    driver.find_element("xpath", "//button[@class='btn btn-primary' and @name='continue']").click()
+    driver.find_element("xpath", "//input[@name='lname']").send_keys(lname)
+    driver.find_element("xpath", "//input[@name='nick']").send_keys(gname)
     dropdown = driver.find_element("xpath", "//select[@name='q2613']")
     dropselect = Select(dropdown)
     dropselect.select_by_visible_text("Undergraduate Student")
     driver.find_element("xpath", "//input[@id='q2614']").send_keys(pid)
-    driver.find_element(
-        "xpath", "//button[@type='submit' and @id='btn-form-submit']").click()
+    driver.find_element("xpath", "//button[@type='submit' and @id='btn-form-submit']").click()
     time.sleep(3)
     print("Booked Room: " + reservation_rooms[roomInt], flush=True)
-    logout(driver, name)
+    logout(driver, nid)
     # Exit(driver)
 
 
 # Helper Functions: #
 
 def date_to_unix_timestamp(date):
-    date_object = dt.datetime.strptime(
-        date, '%Y-%m-%d').replace(tzinfo=pytz.timezone('GMT'))
+    date_object = dt.datetime.strptime(date, '%Y-%m-%d').replace(tzinfo=pytz.timezone('GMT'))
     return (int(date_object.timestamp())) * 1000
 
 
 # changes current date to reservation date to list availability
 
 def gotoday(driver):
-    driver.find_element(
-        "xpath", "//button[@class='fc-goToDate-button btn btn-default btn-sm' and @aria-label='Go To Date']").click()
+    driver.find_element("xpath", "//button[@class='fc-goToDate-button btn btn-default btn-sm' and @aria-label='Go To Date']").click()
     if (driver.find_element("xpath", "//th[@class='datepicker-switch'and @colspan='5']").text != reservation_date.strftime("%B %Y")):
         driver.find_element("xpath", "//th[@class='next']").click()
-        print("Going to: "+driver.find_element("xpath",
-              "//th[@class='datepicker-switch'and @colspan='5']").text, flush=True)
+        print("Going to: "+driver.find_element("xpath","//th[@class='datepicker-switch'and @colspan='5']").text, flush=True)
     driver.find_element("xpath", "//td[@data-date='" + str(
         date_to_unix_timestamp(reservation_date.strftime("%Y-%m-%d"))) + "']").click()
     time.sleep(1)
@@ -155,8 +146,7 @@ def ListAvailablesStrings(start, end, roomToReseve):
     finals = []
     times = getTimesInList(start, end)
     while start <= end:
-        finals.append(times[i]+" "+reservation_date.strftime("%A, %B %d, %Y").replace(
-            ' 0', ' ')+" - Room "+roomToReseve+" - Available")
+        finals.append(times[i]+" "+reservation_date.strftime("%A, %B %d, %Y").replace(' 0', ' ')+" - Room "+roomToReseve+" - Available")
         start += timedelta(minutes=30)
         i = i + 1
     return finals
@@ -168,8 +158,7 @@ def checkavailable(driver, roomNum, start, finish):
     myTimes = ListAvailablesStrings(start, finish, reservation_rooms[roomNum])
     try:
         for i in range(len(myTimes)):
-            driver.find_element(
-                "xpath", "//a[@class='fc-timeline-event fc-h-event fc-event fc-event-start fc-event-end fc-event-future s-lc-eq-avail' and @aria-label='"+myTimes[i]+"']")
+            driver.find_element("xpath", "//a[@class='fc-timeline-event fc-h-event fc-event fc-event-start fc-event-end fc-event-future s-lc-eq-avail' and @aria-label='"+myTimes[i]+"']")
         return True
     except Exception:
         return False
