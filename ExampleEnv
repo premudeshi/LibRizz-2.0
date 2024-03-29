@@ -1,4 +1,5 @@
 NID1=YourNID
 Password1=YourPassword
 SID1=YourStudentID
-Name1=Name For Reservation
+lname1=Your last name
+gname= Group name
