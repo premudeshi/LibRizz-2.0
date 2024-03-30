@@ -23,10 +23,8 @@
     Dockerized Version of Automatic library room booking bot for Springshare Libcal
     <br />
     <br />
-    <a href="https://github.com/anaghpatel/LibRizz-2.0#about-the-project">View Demo</a>
-    ·
     <a href="https://github.com/anaghpatel/LibRizz-2.0/issues">Report Bug</a>
-    ·
+    
 
   </p>
 </div>
@@ -52,7 +50,6 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -106,7 +103,7 @@ _Once you have Docker installed you can folow the steps below to spin up the req
    ```sh
    git clone https://github.com/anaghpatel/LibRizz-2.0.git
    ```
-2. Open Cmd or bash shell in cloned repo. 
+2. Open CMD or bash shell in cloned repo. 
 <br />
 
 3. Pull Selenium chrome standalone docker image rom Docker Hub
@@ -144,14 +141,13 @@ _Once you have Docker installed you can folow the steps below to spin up the req
 
 <br />
 
-7. Run the LibRizz Container using command below. 
+7. Run the LibRizz Container using command below. (This commad fires up LibRizz.py that makes the reservation automatically. )
    ```sh
    docker run -d --rm --shm-size="2g" --name LibRizz librizz:1.0
 
    ```
-  Last commad fires up LibRizz that makes the reservation automatically. 
-
-<br />  
+ 
+<br />
 
 8. Last and final step is to stop Selenium container. (LibRizz container self-destroys itself once its finished running script.)
    ```sh
@@ -220,7 +216,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 <!-- CONTACT -->
 ## 📧 Contact
 
-Your Name - [@anagh_patel](https://twitter.com/anagh_patel) - anaghpatel28@gmail.com
+Anagh Patel - [@anagh_patel](https://twitter.com/anagh_patel) - anaghpatel28@gmail.com
 
 Project Link: [https://github.com/anaghpatel/LibRizz-2.0](https://github.com/anaghpatel/LibRizz-2.0)
 
