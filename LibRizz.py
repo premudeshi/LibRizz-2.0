@@ -119,6 +119,7 @@ def date_to_unix_timestamp(date):
 # changes current date to reservation date to list availability
 
 def gotoday(driver):
+    print("Current URL {}".format(driver.current_url))
     driver.find_element("xpath", "//button[@class='fc-goToDate-button btn btn-default btn-sm' and @aria-label='Go To Date']").click()
     if (driver.find_element("xpath", "//th[@class='datepicker-switch'and @colspan='5']").text != reservation_date.strftime("%B %Y")):
         driver.find_element("xpath", "//th[@class='next']").click()
