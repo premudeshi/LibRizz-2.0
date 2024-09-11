@@ -76,7 +76,7 @@ class Runner:
 
         elif int(choice) == 4:
             print("Book rooms")
-            main(self.start_time, self.users[0]['NID'], self.users[0]['Password'], self.users[0]['Student ID'], self.groupName, self.users[0]['Last Name'])
+            main(self.start_time, self.stop_time,self.users[0]['NID'], self.users[0]['Password'], self.users[0]['Student ID'], self.groupName, self.users[0]['Last Name'])
             return
 
         elif int(choice) == 5:
