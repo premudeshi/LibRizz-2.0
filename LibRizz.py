@@ -149,7 +149,7 @@ def ListAvailablesStrings(start, end, roomToReseve):
     i = 0
     finals = []
     times = getTimesInList(start, end)
-    while start.time() <= end:
+    while start <= end:
         finals.append(times[i]+" "+start.strftime("%A, %B %d, %Y").replace(' 0', ' ')+" - Room "+roomToReseve+" - Available")
         start += timedelta(minutes=30)
         i = i + 1
