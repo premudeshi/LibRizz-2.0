@@ -174,7 +174,8 @@ def checkavailable(driver, roomNum, start, finish):
                                               "//a[contains(@class, 'fc-timeline-event') and contains(@aria-label, '{}')]".format(
                                                   reservation_rooms[roomNum]))
         for elem in close_elements:
-            print("Close element found: {}".format(elem.get_attribute("aria-label")))
+            outer_html = elem.get_attribute("outerHTML")
+            print("Close element found: {}".format(outer_html))
 
         return False
 
