@@ -64,6 +64,7 @@ def check_and_update_calendar():
 
 
 
+time.sleep(10)
 print("Starting")
 check_and_update_calendar()
 
