@@ -41,6 +41,7 @@ class Runner:
             if int(choiceSub) == 1:
                 newDate = input("Please enter the new booking date and time: (YYYY-MM-DD HH:MM:SS)")
                 self.datetime = dt.datetime.strptime(newDate, '%Y-%m-%d %H:%M:%S')
+                self.calculate_times()
                 return
             elif int(choiceSub) == 2:
                 newDuration = input("Please enter the new duration in hours:")
