@@ -96,7 +96,7 @@ def reserve(driver, roomInt, start, finish, nid, passwrd, pid, gname,lname):
     login(driver, nid, passwrd, nid)
     time.sleep(2)
     driver.find_element("xpath", "//button[@class='btn btn-primary' and @name='continue']").click()
-    driver.find_element("xpath", "//input[@name='lname']").send_keys(lname)
+    #driver.find_element("xpath", "//input[@name='lname']").send_keys(lname)
     driver.find_element("xpath", "//input[@name='nick']").send_keys(gname)
     dropdown = driver.find_element("xpath", "//select[@name='q2613']")
     dropselect = Select(dropdown)
