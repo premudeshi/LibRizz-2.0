@@ -12,7 +12,7 @@ import time
 import pytz
 
 
-reservation_date = dt.datetime.now()+timedelta(days=7)
+#reservation_date = dt.datetime.now()+timedelta(days=7)
 
 reservation_rooms = ["370B", "370A", "381", "386", "176", "172","377", "378", "379", "387", "388", "389", "371", "372", "373"]
 
@@ -27,7 +27,7 @@ def main(start, stop, nid, password, sid, gname, lname, sUrl="http://selenium:44
     driver1 = webdriver.Remote(sUrl, options=webdriver.ChromeOptions())
     #driver1 = webdriver.Chrome('./chromedriver')   #for debugging
     driver1.get(url)
-    gotoday(driver1)
+    gotoday(driver1, start)
     ReserveEngine(driver1, start, stop, nid, password, sid, gname, lname)
     #ReserveEngine(driver1, datetime.strptime("2:00pm", "%I:%M%p"), datetime.strptime("6:00pm", "%I:%M%p"), NID2, Password2, SID2, gname, lname2)
     Exit(driver1)
@@ -75,21 +75,21 @@ def logout(driver, nid):
     driver.find_element(By.LINK_TEXT, "Logout").click()
     print("Logged out Sucessfully As "+nid, flush=True)
     driver.get(url)
-    gotoday(driver)
+    gotoday(driver, start=datetime.now())
 
 
 # Room reservation function
 
 def reserve(driver, roomInt, start, finish, nid, passwrd, pid, gname,lname):
     times = getTimesInList(start, finish)
-    print(times[0]+" to "+times[len(times)-1]+" on " +reservation_date.strftime("%A, %B %d, %Y").replace(' 0', ' '), flush=True)
+    print(times[0]+" to "+times[len(times)-1]+" on " +start.strftime("%A, %B %d, %Y").replace(' 0', ' '), flush=True)
     myTimes = ListAvailablesStrings(start, finish, reservation_rooms[roomInt])
     temp = driver.find_element("xpath", "//a[@class='fc-timeline-event fc-h-event fc-event fc-event-start fc-event-end fc-event-future s-lc-eq-avail' and @aria-label='"+myTimes[0]+"']")
     driver.execute_script("arguments[0].click();", temp)
     time.sleep(4)
     dropdown = driver.find_element("xpath", "//select[@class='form-control input-sm b-end-date']")
     dropselect = Select(dropdown)
-    dropselect.select_by_visible_text(times[len(times)-1]+" "+reservation_date.strftime("%A, %B %d, %Y").replace(' 0', ' '))
+    dropselect.select_by_visible_text(times[len(times)-1]+" "+start.strftime("%A, %B %d, %Y").replace(' 0', ' '))
     time.sleep(3)
     driver.find_element("xpath", "//button[@id='submit_times']").click()
     time.sleep(2)
@@ -118,14 +118,14 @@ def date_to_unix_timestamp(date):
 
 # changes current date to reservation date to list availability
 
-def gotoday(driver):
+def gotoday(driver, start):
     print("Current URL {}".format(driver.current_url))
     driver.find_element("xpath", "//button[@class='fc-goToDate-button btn btn-default btn-sm' and @aria-label='Go To Date']").click()
-    if (driver.find_element("xpath", "//th[@class='datepicker-switch'and @colspan='5']").text != reservation_date.strftime("%B %Y")):
+    if (driver.find_element("xpath", "//th[@class='datepicker-switch'and @colspan='5']").text != start.strftime("%B %Y")):
         driver.find_element("xpath", "//th[@class='next']").click()
         print("Going to: "+driver.find_element("xpath","//th[@class='datepicker-switch'and @colspan='5']").text, flush=True)
     driver.find_element("xpath", "//td[@data-date='" + str(
-        date_to_unix_timestamp(reservation_date.strftime("%Y-%m-%d"))) + "']").click()
+        date_to_unix_timestamp(start.strftime("%Y-%m-%d"))) + "']").click()
     time.sleep(1)
 
 
