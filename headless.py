@@ -60,19 +60,15 @@ def check_and_update_calendar():
             print(f"Updated Event: {updated_event['summary']} at {updated_event['location']}")
 
 
-
-
-
-time.sleep(10)
+time.sleep(2)
 print("Starting")
-check_and_update_calendar()
+#check_and_update_calendar()
 
 
-'''
+
 # Schedule the script to run every hour
-schedule.every().hour.do(check_and_update_calendar)
+schedule.every(15).minutes.do(check_and_update_calendar)
 
 while True:
     schedule.run_pending()
     time.sleep(1)
-'''
