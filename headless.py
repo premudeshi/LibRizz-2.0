@@ -50,6 +50,7 @@ def check_and_update_calendar():
             settings = get_settings()
 
             try:
+                print("{} nd {}".format(type(start_time), type(end_time)))
                 room = main(start_time, end_time,settings['user_nid'], settings['user_pass'], settings['user_pid'], settings['user_group'], settings['user_lname'])
                 # Update the event
                 event['summary'] = '[CONFIRMED] ' + event['summary']
