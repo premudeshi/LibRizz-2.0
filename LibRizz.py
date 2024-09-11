@@ -20,6 +20,7 @@ url = "https://ucf.libcal.com/spaces?lid=2824&gid=4780&c=0"
 
 
 def main(start, stop, nid, password, sid, gname, lname, sUrl="http://selenium:4444"):
+
     #print("Date Reserveing: " +reservation_date.strftime("%B %d, %Y").replace(' 0', ' '), flush=True)
 
     chrome_options = webdriver.ChromeOptions()
@@ -29,6 +30,7 @@ def main(start, stop, nid, password, sid, gname, lname, sUrl="http://selenium:44
     driver1.get(url)
     gotoday(driver1, start)
     room = ReserveEngine(driver1, start, stop, nid, password, sid, gname, lname)
+    print(room)
     #ReserveEngine(driver1, datetime.strptime("2:00pm", "%I:%M%p"), datetime.strptime("6:00pm", "%I:%M%p"), NID2, Password2, SID2, gname, lname2)
     Exit(driver1)
     # driver3 = webdriver.Chrome()
