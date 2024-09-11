@@ -54,7 +54,7 @@ def ReserveEngine(driver, start, finish, nid, passwrd, pid, gname,lname):
 
 
 def login(driver, username, password, nid):
-    print("Logging In As "+nid, flush=True)
+    print("Logging In As {}".format(username), flush=True)
     time.sleep(10)
     username_field = driver.find_element("xpath", "//input[@id='userNameInput']")
     username_field.send_keys(username)
@@ -65,7 +65,7 @@ def login(driver, username, password, nid):
     sign_on_button = driver.find_element("xpath", "//span[@id='submitButton']")
     sign_on_button.click()
     time.sleep(5)
-    print("Logged In Sucessfully As "+nid, flush=True)
+    print("Logged In Sucessfully As {}".format(username), flush=True)
 
 # Log out function
 
