@@ -137,7 +137,7 @@ def gotoday(driver, start):
 
 def getTimesInList(start, end):
     times = []
-    while start.time() <= end:
+    while start <= end:
         times.append(start.strftime("%I:%M%p").lstrip('0').lower())
         start += timedelta(minutes=30)
     return times

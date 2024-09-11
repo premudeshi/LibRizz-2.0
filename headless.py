@@ -51,6 +51,7 @@ def check_and_update_calendar():
 
             print("{} nd {}".format(type(start_time), type(end_time)))
             room = main(start_time, end_time,settings['user_nid'], settings['user_pass'], settings['user_pid'], settings['user_group'], settings['user_lname'])
+            print(room)
             # Update the event
             event['summary'] = '[CONFIRMED] ' + event['summary']
             event['location'] = str(room)  # Update with the desired location
