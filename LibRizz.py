@@ -133,7 +133,7 @@ def gotoday(driver, start):
 
 def getTimesInList(start, end):
     times = []
-    while start <= end:
+    while start.time() <= end:
         times.append(start.strftime("%I:%M%p").lstrip('0').lower())
         start += timedelta(minutes=30)
     return times
@@ -145,7 +145,7 @@ def ListAvailablesStrings(start, end, roomToReseve):
     i = 0
     finals = []
     times = getTimesInList(start, end)
-    while start <= end:
+    while start.time() <= end:
         finals.append(times[i]+" "+start.strftime("%A, %B %d, %Y").replace(' 0', ' ')+" - Room "+roomToReseve+" - Available")
         start += timedelta(minutes=30)
         i = i + 1
