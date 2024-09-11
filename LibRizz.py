@@ -162,8 +162,10 @@ def checkavailable(driver, roomNum, start, finish):
     try:
         for i in range(len(myTimes)):
             driver.find_element("xpath", "//a[@class='fc-timeline-event fc-h-event fc-event fc-event-start fc-event-end fc-event-future s-lc-eq-avail' and @aria-label='"+myTimes[i]+"']")
+        print("Found - A")
         return True
-    except Exception:
+    except Exception as e:
+        print("Not Found - {}".format(e))
         return False
 
 
