@@ -155,6 +155,7 @@ def ListAvailablesStrings(start, end, roomToReseve):
 
 
 def checkavailable(driver, roomNum, start, finish):
+    print("Room is ", roomNum)
     myTimes = ListAvailablesStrings(start, finish, reservation_rooms[roomNum])
     try:
         for i in range(len(myTimes)):
