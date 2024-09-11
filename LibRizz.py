@@ -75,7 +75,7 @@ def logout(driver, nid):
     driver.find_element(By.LINK_TEXT, "Logout").click()
     print("Logged out Sucessfully As "+nid, flush=True)
     driver.get(url)
-    gotoday(driver)
+    gotoday(driver, start=datetime.now())
 
 
 # Room reservation function
