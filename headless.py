@@ -49,17 +49,14 @@ def check_and_update_calendar():
 
             settings = get_settings()
 
-            try:
-                print("{} nd {}".format(type(start_time), type(end_time)))
-                room = main(start_time, end_time,settings['user_nid'], settings['user_pass'], settings['user_pid'], settings['user_group'], settings['user_lname'])
-                # Update the event
-                event['summary'] = '[CONFIRMED] ' + event['summary']
-                event['location'] = str(room)  # Update with the desired location
+            print("{} nd {}".format(type(start_time), type(end_time)))
+            room = main(start_time, end_time,settings['user_nid'], settings['user_pass'], settings['user_pid'], settings['user_group'], settings['user_lname'])
+            # Update the event
+            event['summary'] = '[CONFIRMED] ' + event['summary']
+            event['location'] = str(room)  # Update with the desired location
 
-                updated_event = service.events().update(calendarId=CALENDAR_ID, eventId=event['id'], body=event).execute()
-                print(f"Updated Event: {updated_event['summary']} at {updated_event['location']}")
-            except Exception as e:
-                print(e)
+            updated_event = service.events().update(calendarId=CALENDAR_ID, eventId=event['id'], body=event).execute()
+            print(f"Updated Event: {updated_event['summary']} at {updated_event['location']}")
 
 
 
