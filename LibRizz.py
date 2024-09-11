@@ -149,6 +149,8 @@ def ListAvailablesStrings(start, end, roomToReseve):
         finals.append(times[i]+" "+start.strftime("%A, %B %d, %Y").replace(' 0', ' ')+" - Room "+roomToReseve+" - Available")
         start += timedelta(minutes=30)
         i = i + 1
+
+    print(finals)
     return finals
 
 # Checks for availability
