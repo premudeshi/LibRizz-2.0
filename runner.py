@@ -36,7 +36,8 @@ class Runner:
             print("Current Booking Time: {} and duration is {} hours".format(self.datetime, self.duration))
             print("1. Change Booking Time")
             print("2. Change Duration")
-            print("3. Go Back")
+            print("3. Import")
+            print("4. Go Back")
             choiceSub = input("Please select what you would like to do:")
             if int(choiceSub) == 1:
                 newDate = input("Please enter the new booking date and time: (YYYY-MM-DD HH:MM:SS)")
@@ -48,6 +49,10 @@ class Runner:
                 self.duration = int(newDuration)
                 return
             elif int(choiceSub) == 3:
+                self.datetime = dt.datetime.strptime(os.getenv("datestr"), '%Y-%m-%d %H:%M:%S')
+                print("Date set to {}".format(os.getenv("datestr")))
+                return
+            elif int(choiceSub) == 4:
                 return
 
         elif int(choice) == 2:
