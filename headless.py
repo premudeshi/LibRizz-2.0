@@ -36,6 +36,8 @@ def check_and_update_calendar():
                                           orderBy='startTime').execute()
     events = events_result.get('items', [])
 
+    print("Found {} events".format(len(events)))
+
     for event in events:
         if '[CONFIRMED]' not in event['summary']:
             start = event['start'].get('dateTime', event['start'].get('date'))
@@ -62,7 +64,7 @@ def check_and_update_calendar():
 
 
 
-
+print("Starting")
 check_and_update_calendar()
 
 
