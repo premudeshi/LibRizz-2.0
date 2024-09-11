@@ -7,6 +7,9 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from dateutil import parser
 from LibRizz import main
+import requests
+
+
 
 
 
@@ -26,6 +29,23 @@ def get_settings():
     with open('settings.json', 'r') as file:
         data = json.load(file)
     return data
+
+def alert(title, message):
+    url = "https://api.pushover.net/1/messages.json"
+    settings = get_settings()
+    data = {
+        "token": settings['pushover_token'],
+        "user": settings['pushover_user'],
+        "title": title,
+        "message": message
+    }
+    headers = {
+        "Content-type": "application/x-www-form-urlencoded"
+    }
+
+    response = requests.post(url, data=data, headers=headers)
+    print(response.status_code)
+    print(response.text)
 
 def check_and_update_calendar():
     now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
@@ -50,14 +70,19 @@ def check_and_update_calendar():
             settings = get_settings()
 
             print("{} nd {}".format(type(start_time), type(end_time)))
-            room = main(start_time, end_time,settings['user_nid'], settings['user_pass'], settings['user_pid'], settings['user_group'], settings['user_lname'])
-            print(room)
-            # Update the event
-            event['summary'] = '[CONFIRMED] ' + event['summary']
-            event['location'] = str(room)  # Update with the desired location
+            try:
+                room = main(start_time, end_time,settings['user_nid'], settings['user_pass'], settings['user_pid'], settings['user_group'], settings['user_lname'])
+                print(room)
+                # Update the event
+                event['summary'] = '[CONFIRMED] ' + event['summary']
+                event['location'] = str(room)  # Update with the desired location
 
-            updated_event = service.events().update(calendarId=CALENDAR_ID, eventId=event['id'], body=event).execute()
-            print(f"Updated Event: {updated_event['summary']} at {updated_event['location']}")
+                updated_event = service.events().update(calendarId=CALENDAR_ID, eventId=event['id'], body=event).execute()
+                print(f"Updated Event: {updated_event['summary']} at {updated_event['location']}")
+                alert("Booked Room", f"Booked room {room} for {duration} hours on {start_time.strftime('%A, %B %d, %Y')}")
+            except Exception as e:
+                alert("Error", "There was an error booking a room. Please check the calendar. Error: {}".format(e))
+                print("Error booking room")
 
 
 time.sleep(2)
