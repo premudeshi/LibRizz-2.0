@@ -84,7 +84,7 @@ def reserve(driver, roomInt, start, finish, nid, passwrd, pid, gname,lname):
     times = getTimesInList(start, finish)
     print(times[0]+" to "+times[len(times)-1]+" on " +start.strftime("%A, %B %d, %Y").replace(' 0', ' '), flush=True)
     myTimes = ListAvailablesStrings(start, finish, reservation_rooms[roomInt])
-    temp = driver.find_element("xpath", "//a[@class='fc-timeline-event fc-h-event fc-event fc-event-start fc-event-end fc-event-future s-lc-eq-avail' and @aria-label='"+myTimes[0]+"']")
+    temp =driver.find_element("xpath", "//a[@aria-label='"+myTimes[0]+"']")
     driver.execute_script("arguments[0].click();", temp)
     time.sleep(4)
     dropdown = driver.find_element("xpath", "//select[@class='form-control input-sm b-end-date']")
