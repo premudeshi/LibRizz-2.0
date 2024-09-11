@@ -19,12 +19,12 @@ reservation_rooms = ["370B", "370A", "381", "386", "176", "172","377", "378", "3
 url = "https://ucf.libcal.com/spaces?lid=2824&gid=4780&c=0"
 
 
-def main(start, stop, nid, password, sid, gname, lname, url="http://selenium:4444"):
+def main(start, stop, nid, password, sid, gname, lname, sUrl="http://selenium:4444"):
     #print("Date Reserveing: " +reservation_date.strftime("%B %d, %Y").replace(' 0', ' '), flush=True)
 
     chrome_options = webdriver.ChromeOptions()
     # chrome_options.add_argument("--headless")
-    driver1 = webdriver.Remote(url, options=webdriver.ChromeOptions())
+    driver1 = webdriver.Remote(sUrl, options=webdriver.ChromeOptions())
     #driver1 = webdriver.Chrome('./chromedriver')   #for debugging
     driver1.get(url)
     gotoday(driver1)
