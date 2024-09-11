@@ -75,7 +75,7 @@ def logout(driver, nid):
     driver.find_element(By.LINK_TEXT, "Logout").click()
     print("Logged out Sucessfully As "+nid, flush=True)
     driver.get(url)
-    gotoday(driver, start=datetime.now())
+    gotoday(driver)
 
 
 # Room reservation function
@@ -127,6 +127,7 @@ def gotoday(driver, start):
     driver.find_element("xpath", "//td[@data-date='" + str(
         date_to_unix_timestamp(start.strftime("%Y-%m-%d"))) + "']").click()
     time.sleep(1)
+    print("Going to {}".format(start.strftime("%Y-%m-%d")))
 
 
 # creates list of all reservation time (every 30 mins)
