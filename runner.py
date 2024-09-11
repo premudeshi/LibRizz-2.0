@@ -15,7 +15,7 @@ class Runner:
 
     def calculate_times(self):
         if self.datetime and self.duration:
-            self.start_time = self.datetime.time()
+            self.start_time = self.datetime
             self.stop_time = (self.datetime + dt.timedelta(hours=self.duration)).time()
 
     def print_main_menu(self):
