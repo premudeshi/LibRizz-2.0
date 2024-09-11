@@ -1,4 +1,6 @@
 import datetime as dt
+import os
+
 from LibRizz import main
 
 class Runner:
@@ -61,7 +63,8 @@ class Runner:
         elif int(choice) == 3:
             print("There are {} users.".format(len(self.users)))
             print("1. Add User")
-            print("2. Go Back")
+            print("2. Import User")
+            print("3. Go Back")
             choiceSub = input("Please select what you would like to do:")
             if int(choiceSub) == 1:
                 newUser = {}
@@ -72,6 +75,15 @@ class Runner:
                 self.users.append(newUser)
                 return
             elif int(choiceSub) == 2:
+                newUser = {}
+                newUser["NID"] = os.getenv("NID1")
+                newUser["Password"] = os.getenv("Password1")
+                newUser["Last Name"] = os.getenv("lname1")
+                newUser["Student ID"] = os.getenv("SID1")
+                self.users.append(newUser)
+                return
+
+            elif int(choiceSub) == 3:
                 return
 
         elif int(choice) == 4:
