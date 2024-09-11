@@ -3,3 +3,8 @@ selenium>=4.16.0
 timedelta>=2020.12.3
 DateTime>=5.1
 python-dotenv>=1.0.0
+schedule
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+python-dateutil

@@ -28,14 +28,14 @@ def main(start, stop, nid, password, sid, gname, lname, sUrl="http://selenium:44
     #driver1 = webdriver.Chrome('./chromedriver')   #for debugging
     driver1.get(url)
     gotoday(driver1, start)
-    ReserveEngine(driver1, start, stop, nid, password, sid, gname, lname)
+    room = ReserveEngine(driver1, start, stop, nid, password, sid, gname, lname)
     #ReserveEngine(driver1, datetime.strptime("2:00pm", "%I:%M%p"), datetime.strptime("6:00pm", "%I:%M%p"), NID2, Password2, SID2, gname, lname2)
     Exit(driver1)
     # driver3 = webdriver.Chrome()
     # driver3.get(url)
     # gotoday(driver3)
     # ReserveEngine(driver3, datetime.strptime("6:00pm", "%I:%M%p"), datetime.strptime("10:00pm", "%I:%M%p"), "NID" , "PASSWORD", "PID", "RESERVATION NAME")
-
+    return room
 # confirms availability and calls reserve fuction to reserve it.
 
 
@@ -44,11 +44,11 @@ def ReserveEngine(driver, start, finish, nid, passwrd, pid, gname,lname):
     while True:
         if checkavailable(driver, i, start, finish):
             print("Reserving Room: " + reservation_rooms[i], flush=True)
-            reserve(driver, i, start, finish, nid, passwrd, pid, gname,lname)
-            break
+            return reserve(driver, i, start, finish, nid, passwrd, pid, gname,lname)
         else:
             print("Could not reserve: " + reservation_rooms[i], flush=True)
             i += 1
+
 
 # Log In function
 
@@ -106,6 +106,7 @@ def reserve(driver, roomInt, start, finish, nid, passwrd, pid, gname,lname):
     time.sleep(3)
     print("Booked Room: " + reservation_rooms[roomInt], flush=True)
     logout(driver, nid)
+    return reservation_rooms[roomInt]
     # Exit(driver)
 
 

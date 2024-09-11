@@ -1,0 +1,14 @@
+{
+
+  "user_nid": "",
+  "user_pass": "",
+  "user_group": "",
+  "user_lname": "",
+  "user_pid": "",
+
+  "notify": true,
+  "pushover_token": "",
+  "pushover_user": ""
+
+
+}

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "librizz-435311",
+  "private_key_id": "8836314885cef68e43a48f9f8640b80ddcd11f05aa",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDTJkunRA2omEDQ\nJRdz34Fq7Gzlm2rFxY3+8vw7LVw6tnPr5FzXK6gVGzhXZmLTlYZ//KY3z2ld86qA\nv4XE8KqV4eWQkIRStyBJEmVRN/8ylBe8SwZLafpx2znASFYQGQDvMQbCfUPOWJYM\nhS4BWxQbmJQ3ZbRJKK5GRtPd3JR2NUm+Av3p1/PKgZMUCml9vjvFKHxBeCbpb9ly\njwVOgEl1/0FSzgldHl9f1D6ySO7sYW2Od1sFGwCJYc8E0uLhhZp8u2tyloIZ/xCP\nxuh2U9LbJVQ3T+EWUeEnSXNy6aOBC93Az/qkLB6RX8BYT/va+yE36PvPHpoAPXE5\nBFCZ0jupAgMBAAECggEAXgmSrPJqkNkKGIlEaiczCK82CoZOpbkHtfF6s1JO3pku\nhHLmhC/dwlSmoYooXmocBjk7v+RgXWbtWzyw81Zp6qm6J0mtnPcQ6mpGdEcXoWuC\nLKpPKdwPnZCQplmw9qdkGqL/izPltGsQnI/dvt3U1Tt9WzSw99olz4ewyQD5n7Dp\nqHzflbzN092Xy3H3ndgB3OM74KcF4JR9qv5r9r423RmrIy+Lm4bA7dxVyFRQ7QRr\nXEis8CHoaFxe5sbwNm2xvITCeOHndnW+qPn1iohbFR8RMKS3/QJWWPnNqQy8pJtO\nUY2RmKYoRjS/3yRggw5FjM8oh47GtfB59NdP0yMnLwKBgQDwwesIQ3+3ZZQNS8Is\nPcaFmOxtXYaRg1+qiavkwbh4l7Ch1RhnOAl0syxXDPccjsa2kpHfMMGYN79moKIi\nvelnPNjIWhZug218CGIOhRhRfZ24eqbixpdQrNhHoVAmsohr9EKuxrKpJNLorzWZ\nX6rdJlEN0w+0VilygXIG1ZxyowKBgQDghIG8WCK/A1f+yPkIhoB++6OCIugDqS76\n4YlTrsU/3Y+ySu7sFA3kQM6Nb5Rfd/ZSwwIYxLvq0YQILG01UtZ308IJK4DkwLub\n85TpRP2oDutetjOAf/33Jt4Ql0GvWan0Jy6yXTT3svZqs224R21KzLbE+pYdiq98\nbEMn5M2JQwKBgQDhrWSbAmqdhuIY9IK25dFJOeelPJ3/mJ38RcCTVeONZuNzT0To\nvGZgtfNCRiz83/j0+r8x74oJHXiUws44srwuwaKTa57LSPc/5LvF0IzTFmTZoF7/\nBBiizuKNgnCXVZL7XqODIU4nrxTkeBhOBJctZdVkmAuIh5uiciRos6NK8QKBgQCe\nxdYhZYqc3jZ6XZGPL97q7fWBcEH3ZMtua9R7s1qWgY6/HTK9DKmOQy5O4xtgMCun\n93QiI+5obuYaCaDpVr2IW94aMgOiwZFrBeTG2h0vne1hOyRMuTbWc0wTG4Q+BwCj\nQppJVJTCnnKYnm73JLvra73MqxFBrvPO35jWO34GlQKBgD+ya9oclzOq7ujGjgOG\nRxr8+Po5ZcqW7FQtqmlb7LKEseXmclByRv7USyxH0URSNRZJeZIlV2VlErEMLLpe\nPUIbsUzyXpODOfpp26tc+2hSEAKPzK7kAEwjrV7D9wP9aDSAiI0XM5RPnFSr1bxt\niHAz/RZemiaTNdtK+6fYAwOw\n-----END PRIVATE KEY-----\n",
+  "client_email": "librizzpuller@librizz-435311.iam.gserviceaccount.com",
+  "client_id": "117099098640263818656",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/librizzpuller%40librizz-435311.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

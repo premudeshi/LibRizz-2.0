@@ -13,4 +13,4 @@ WORKDIR /LibRizz
 
 RUN python3 -m pip install -r requirements.txt
 
-CMD [ "python3","runner.py"]
+CMD [ "python3","headless.py"]
