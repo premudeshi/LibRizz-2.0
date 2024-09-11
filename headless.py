@@ -55,8 +55,8 @@ def check_and_update_calendar():
 
                 updated_event = service.events().update(calendarId=CALENDAR_ID, eventId=event['id'], body=event).execute()
                 print(f"Updated Event: {updated_event['summary']} at {updated_event['location']}")
-            except:
-                pass
+            except Exception as e:
+                print(e)
 
 
 
