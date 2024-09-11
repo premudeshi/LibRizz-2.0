@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from settings import NID1, Password1, SID1, Name1, NID2, Password2, SID2, Name2
+#from settings import NID1, Password1, SID1, Name1, NID2, Password2, SID2, Name2
 import traceback
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -19,18 +19,17 @@ reservation_rooms = ["370B", "370A", "381", "386", "176", "172","377", "378", "3
 url = "https://ucf.libcal.com/spaces?lid=2824&gid=4780&c=0"
 
 
-def main():
-    print("Date Reserveing: " +
-          reservation_date.strftime("%B %d, %Y").replace(' 0', ' '), flush=True)
+def main(start, stop, nid, password, sid, gname, lname, url="http://selenium:4444"):
+    #print("Date Reserveing: " +reservation_date.strftime("%B %d, %Y").replace(' 0', ' '), flush=True)
 
     chrome_options = webdriver.ChromeOptions()
     # chrome_options.add_argument("--headless")
-    driver1 = webdriver.Remote("http://172.17.0.2:4444", options=webdriver.ChromeOptions())
+    driver1 = webdriver.Remote(url, options=webdriver.ChromeOptions())
     #driver1 = webdriver.Chrome('./chromedriver')   #for debugging
     driver1.get(url)
     gotoday(driver1)
-    ReserveEngine(driver1, datetime.strptime("10:00am", "%I:%M%p"), datetime.strptime("2:00pm", "%I:%M%p"), NID1, Password1, SID1, gname, lname1)
-    ReserveEngine(driver1, datetime.strptime("2:00pm", "%I:%M%p"), datetime.strptime("6:00pm", "%I:%M%p"), NID2, Password2, SID2, gname, lname2)
+    ReserveEngine(driver1, start, stop, nid, password, sid, gname, lname)
+    #ReserveEngine(driver1, datetime.strptime("2:00pm", "%I:%M%p"), datetime.strptime("6:00pm", "%I:%M%p"), NID2, Password2, SID2, gname, lname2)
     Exit(driver1)
     # driver3 = webdriver.Chrome()
     # driver3.get(url)
@@ -171,4 +170,4 @@ def Exit(driver):
 # Calling Main: #
 
 
-main()
+#main()
