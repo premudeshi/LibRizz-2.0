@@ -98,6 +98,7 @@ print("Starting")
 # Schedule the script to run every hour
 schedule.every(15).minutes.do(check_and_update_calendar)
 
+check_and_update_calendar()
 while True:
     schedule.run_pending()
     time.sleep(1)
