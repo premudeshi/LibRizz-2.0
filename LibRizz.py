@@ -14,9 +14,9 @@ import pytz
 
 #reservation_date = dt.datetime.now()+timedelta(days=7)
 
-reservation_rooms = ["370B", "370A", "381", "386", "176", "172","377", "378", "379", "387", "388", "389", "371", "372", "373"]
+reservation_rooms = ["370B", "370A", "381", "386", "176", "172","377", "378", "379", "387", "388", "389", "371", "372", "373", "179"]
 
-url = "https://ucf.libcal.com/spaces?lid=2824&gid=4780&c=0"
+url = "https://ucf.libcal.com/spaces?lid=2824&gid=0&c=0"
 
 
 def main(start, stop, nid, password, sid, gname, lname, sUrl="http://selenium:4444"):
