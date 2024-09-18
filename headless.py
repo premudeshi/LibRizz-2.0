@@ -39,13 +39,17 @@ def alert(title, message):
         "title": title,
         "message": message
     }
-    headers = {
-        "Content-type": "application/x-www-form-urlencoded"
-    }
+    try:
+        headers = {
+            "Content-type": "application/x-www-form-urlencoded"
+        }
 
-    response = requests.post(url, data=data, headers=headers)
-    print(response.status_code)
-    print(response.text)
+        response = requests.post(url, data=data, headers=headers)
+        print(response.status_code)
+        print(response.text)
+    except Exception as e:
+        print("[ERROR] Error sending alert : {}".format(e))
+        #print(e)
 
 def check_and_update_calendar():
     now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
